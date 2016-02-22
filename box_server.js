@@ -11,12 +11,12 @@ OAuth.registerService('box', 2, null, function(query) {
 
   var serviceData = {
     accessToken: accessToken,
-    expiresAt: (+new Date) + (1000 * response.expiresIn)
+    expiresAt: Date.now() + (1000 * response.expiresIn)
   };
 
   var fields = _.pick(identity, Box.whitelistedFields);
   _.extend(serviceData, fields);
-  
+
   // Add a proxy for the email address to match other accounts-oauth packages
   serviceData.email = serviceData.login;
 
